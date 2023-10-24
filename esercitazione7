@@ -1,0 +1,22 @@
+#Savioli Arianna 4M
+#esercitazione 7
+#creazione della classe auto
+class auto:
+    def __init__(self, marca, modello, targa, km_percorsi=0):
+        self.marca = marca
+        self.modello = modello
+        self.targa = targa
+        self.km_percorsi = km_percorsi
+#funzione che definisce il numero di kilometri
+    def effettua_viaggio(self, km):
+        if km > 0:
+            self.km_percorsi += km
+            print(f"hai percorso {km} km, ora il totale dei km percorsi e' {self.km_percorsi} km")
+        else:
+            print("il numero di km deve essere maggiore di 0")
+#esempio di utilizzo
+if __name__ == "__main__":
+    mia_auto = auto("toyota", "corolla", "AB123CD")
+    print(f"auto creata: marca - {mia_auto.marca}, modello - {mia_auto.modello}, targa - {mia_auto.targa}, km percorsi - {mia_auto.km_percorsi}")
+    mia_auto.effettua_viaggio(100)  
+    mia_auto.effettua_viaggio(50) 
