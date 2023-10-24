@@ -1,0 +1,26 @@
+#Savioli Arianna 4M
+#esercizio 1
+#creare un dizionario che contenga i dati relativi ad una auto: marca, modello, anno_produzione, potenza_kW e poi memorizzare i dati su un file JSON
+
+# 1)importazione il package built-in json
+import json
+
+# 2)creazione del dizionario "auto"
+auto = {
+    "marca":"Citroen",
+    "modello":"C3",
+    "anno_produzione":"2002",
+    "potenza_kw":44,
+}
+
+# 3)stampa del dizionario a video
+print(type(auto))
+print(auto)
+
+# 4)stampa del dizionario in formato JSON utilizzando il metodo json.dumps()
+print(json.dumps(auto))
+
+# 5)memorizzazione del dizionario su un file myJSON.json1
+f = open("myJSON.json1","w") #apro
+f.write(json.dumps(auto)) #memorizzo
+f.close() #chiudo
