@@ -1,0 +1,118 @@
+#Savioli Arianna 4M
+#esercitazione 6
+import json
+
+def aggiungi_laboratorio(laboratori):
+    id_lab = input("Inserisci l'id del laboratorio: ")
+    nome_lab = input("Inserisci il nome del laboratorio: ")
+    n_pcs = int(input("Inserisci il numero di postazioni: "))
+    laboratori[id_lab] = {"id": id_lab, "nome": nome_lab, "n_pcs": n_pcs, "prenotazioni": {}}
+
+def stampa_laboratori_disponibili(laboratori):
+    print("Laboratori disponibili:")
+    for lab in laboratori.values():
+        print("ID:", lab["id"])
+        print("Nome:", lab["nome"])
+        print("Numero postazioni:", lab["n_pcs"])
+        print("-------------------------")
+
+def cerca_laboratori_liberi(laboratori, fascia_oraria):
+    laboratori_liberi = []
+    for lab in laboratori.values():
+        if fascia_oraria not in lab["prenotazioni"]:
+            laboratori_liberi.append(lab)
+    print("Laboratori liberi in fascia oraria", fascia_oraria + ":")
+    for lab in laboratori_liberi:
+        print("ID:", lab["id"])
+        print("Nome:", lab["nome"])
+        print("Numero postazioni:", lab["n_pcs"])
+        print("-------------------------")
+
+def aggiungi_prenotazione(laboratori):
+    id_lab = input("Inserisci l'id del laboratorio: ")
+    classe = input("Inserisci la classe: ")
+    docente = input("Inserisci il nome del docente: ")
+    materia = input("Inserisci la materia: ")
+
+    if id_lab in laboratori:
+        orario = input("Inserisci l'orario della prenotazione: ")
+        laboratori[id_lab]["prenotazioni"][orario] = {"classe": classe, "docente": docente, "materia": materia}
+        print("Prenotazione aggiunta con successo!")
+    else:
+        print("Laboratorio non trovato!")
+
+def rimuovi_prenotazione(laboratori):
+    id_lab = input("Inserisci l'id del laboratorio: ")
+    if id_lab in laboratori:
+        orario = input("Inserisci l'orario della prenotazione da rimuovere: ")
+        if orario in laboratori[id_lab]["prenotazioni"]:
+            del laboratori[id_lab]["prenotazioni"][orario]
+            print("Prenotazione rimossa con successo!")
+        else:
+            print("Prenotazione non trovata!")
+    else:
+        print("Laboratorio non trovato!")
+
+def stampa_planning_settimanale(laboratori):
+    giorni_settimana = ["lun", "mar", "mer", "gio", "ven"]
+    orari = ["10.00-11.00", "11.00-12.00"] # Esempio di orari, possono essere personalizzati
+
+    for lab in laboratori.values():
+        print(lab["nome"])
+        for orario in orari:
+            prenotazione = lab["prenotazioni"].get(orario, {})
+            print(orario, prenotazione.get("classe", ""), prenotazione.get("docente", ""), prenotazione.get("materia", ""))
+        print("\n")
+
+def ripulisci_planning_settimanale(laboratori):
+    for lab in laboratori.values():
+        lab["prenotazioni"] = {}
+
+def salva_dati(laboratori):
+    with open("prenotazioni.json", "w") as file:
+        json.dump(laboratori, file)
+
+def carica_dati():
+    try:
+        with open("prenotazioni.json", "r") as file:
+            laboratori = json.load(file)
+    except FileNotFoundError:
+        laboratori = {}
+
+    return laboratori
+
+def menu():
+    laboratori = carica_dati()
+
+    while True:
+        print("Seleziona un'opzione:")
+        print("1) Aggiungi laboratorio")
+        print("2) Stampa laboratori disponibili")
+        print("3) Cerca laboratori liberi in una certa fascia oraria")
+        print("4) Aggiungi una prenotazione")
+        print("5) Rimuovi una prenotazione")
+        print("6) Stampa il planning settimanale per ogni laboratorio")
+        print("7) Ripulisci il planning settimanale")
+        print("8) Salva dati e esci")
+        scelta = input("Opzione scelta: ")
+
+        if scelta == "1":
+            aggiungi_laboratorio(laboratori)
+        elif scelta == "2":
+            stampa_laboratori_disponibili(laboratori)
+        elif scelta == "3":
+            fascia_oraria = input("Inserisci la fascia oraria da cercare: ")
+            cerca_laboratori_liberi(laboratori, fascia_oraria)
+        elif scelta == "4":
+            aggiungi_prenotazione(laboratori)
+        elif scelta == "5":
+            rimuovi_prenotazione(laboratori)
+        elif scelta == "6":
+            stampa_planning_settimanale(laboratori)
+        elif scelta == "7":
+            ripulisci_planning_settimanale(laboratori)
+        elif scelta == "8":
+            salva_dati(laboratori)
+            break
+        else:
+            print("Opzione non valida.")
