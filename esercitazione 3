@@ -1,0 +1,47 @@
+#Savioli Arianna 4M
+#esercizio 1
+#Utilizzando i dati ricavati dall'esercizio precedente, creare un codice che permetta di calcolare l'età media degli autoveicoli presenti nella e di calcolare la rata del bollo per un modello di auto scelto dall’utente tra quelli contenuti nella lista
+
+# 1)importazione il package built-in json
+import json
+# 2)calcolo della rata del bollo
+def calcola_rata_bollo(modello, myJSON.json2):
+    for automobile in myJSON.json2:
+        if automobile["modello"] == modello:
+            cilindrata = automobile["cilindrata"]
+            if cilindrata <= 100:
+                rata = 2.58 * cilindrata
+            else:
+                rata = 2.58 * 100 + 3.87 * (cilindrata - 100)
+            return rata
+    return "modello non trovato"
+# 3)calcolo dell'eta media
+def calcola_eta_media(myJSON.json2):
+    anno_corrente = 2023
+    somma_eta = 0
+    num_automobili = len(myJSON.json2)
+
+    for automobile in myJSON.json2:
+        eta = anno_corrente - automobile["anno"]
+        somma_eta += eta
+
+    eta_media = somma_eta / num_automobili
+    return eta_media
+# 4)interfaccia con l'utente
+def esercizio3():
+    with open("myJSON.json2", "r") as file:
+        myJSON.json2 = json.load(file)
+#scelte di calcolo
+    print("1. calcolo della rata del bollo")
+    print("2. calcolo dell'età media degli autoveicoli")
+    scelta = int(input("scegli un'opzione: "))
+#stampa
+    if scelta == 1:
+        modello = input("inserisci il modello dell'automobile: ")
+        rata_bollo = calcola_rata_bollo(modello, myJSON.json2)
+        print("la rata del bollo per il modello", modello, "è di", rata_bollo)
+    elif scelta == 2:
+        eta_media = calcola_eta_media(myJSON.json2)
+        print("l'età media degli autoveicoli presenti nella lista è di", eta_media, "anni")
+    else:
+        print("opzione non valida")
