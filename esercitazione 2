@@ -1,0 +1,28 @@
+#Savioli Arianna 4M
+#esercizio 2
+#Richiedere all'utente di inserire i dati di n automobili, aggiungere tali dati in una lista di dizionari e salvare la lista in un file JSON
+
+# 1)importazione il package built-in json
+import json
+
+# 2)richiesta del  numero di auto da inserire
+n = int(input("inserisci il numero di auto da inserire: "))
+auto_lista = []
+# 3)creazione del ciclo che richiede i dati
+for i in range(n):
+    marca = input("inserisci la marca dell'auto: ")
+    modello = input("inserisci il modello dell'auto: ")
+    anno = input("inserisci l'anno di produzione dell'auto: ")
+# 4)creazione del dizionario contenente i vari dati   
+    auto = {
+        "marca": marca,
+        "modello": modello,
+        "anno": anno
+    }
+# 5)aggiunta del dizionario alla lista     
+    auto_lista.append(auto_lista)
+
+# 6)memorizzazione della lista su un file myJSON.json2
+f = open("myJSON.json2","w") #apro
+f.write(json.dumps(auto_lista)) #memorizzo
+f.close() #chiudo
