@@ -1,0 +1,132 @@
+#Savioli Arianna 4M
+#esercitazione musei
+import json
+
+def carica_museo():
+    try:
+        with open("museo.json", "r") as file_JSON:
+            return json.load(file_JSON)
+    except FileNotFoundError:
+        return {
+            "stanza1": [],
+            "stanza2": [],
+            "stanza3": [],
+            "stanza4": []
+        }
+
+def salva_museo(museo):
+    with open("museo.json", "w") as file_JSON:
+        json.dump(museo, file_JSON, indent=4)
+
+def crea_stanza(museo, nome_stanza):
+    if nome_stanza not in museo:
+        museo[nome_stanza] = []
+        salva_museo(museo)
+        print(f"Stanza '{nome_stanza}' creata con successo.")
+    else:
+        print(f"Stanza '{nome_stanza}' già esistente.")
+
+def aggiungi_opera(museo, nome_stanza):
+    if nome_stanza in museo:
+        autore = input("Inserisci l'autore dell'opera: ")
+        opera = input("Inserisci il titolo dell'opera: ")
+        anno = input("Inserisci l'anno dell'opera: ")
+
+        museo[nome_stanza].append({
+            "Autore": autore,
+            "Opera": opera,
+            "Anno": anno
+        })
+
+        salva_museo(museo)
+        print("Opera aggiunta con successo.")
+    else:
+        print(f"La stanza '{nome_stanza}' non esiste.")
+
+def consulta_opere_stanza(museo, nome_stanza):
+    if nome_stanza in museo:
+        opere = museo[nome_stanza]
+        if opere:
+            print(f"Opere nella stanza '{nome_stanza}':")
+            for opera in opere:
+                print(f"Autore: {opera['Autore']}, Titolo: {opera['Opera']}, Anno: {opera['Anno']}")
+        else:
+            print(f"Nessuna opera nella stanza '{nome_stanza}'.")
+    else:
+        print(f"La stanza '{nome_stanza}' non esiste.")
+
+def consulta_stanze(museo):
+    stanze = list(museo.keys())
+    print("Stanze disponibili:")
+    for stanza in stanze:
+        print(stanza)
+
+def cerca_opera(museo, titolo):
+    for stanza, opere in museo.items():
+        for opera in opere:
+            if opera["Opera"].lower() == titolo.lower():
+                print(f"Opera '{titolo}' trovata nella stanza '{stanza}':")
+                print(f"Autore: {opera['Autore']}, Anno: {opera['Anno']}")
+                return
+    print(f"Opera '{titolo}' non trovata.")
+
+def cancella_opera(museo, titolo):
+    for stanza, opere in museo.items():
+        for opera in opere:
+            if opera["Opera"].lower() == titolo.lower():
+                opere.remove(opera)
+                salva_museo(museo)
+                print(f"Opera '{titolo}' cancellata con successo dalla stanza '{stanza}'.")
+                return
+    print(f"Opera '{titolo}' non trovata.")
+
+def cancella_stanza(museo, nome_stanza):
+    if nome_stanza in museo and not museo[nome_stanza]:
+        del museo[nome_stanza]
+        salva_museo(museo)
+        print(f"Stanza '{nome_stanza}' cancellata con successo.")
+    elif nome_stanza in museo and museo[nome_stanza]:
+        print(f"La stanza '{nome_stanza}' non può essere cancellata perché contiene opere.")
+    else:
+        print(f"La stanza '{nome_stanza}' non esiste.")
+
+def main():
+    museo = carica_museo()
+    
+    while True:
+        print("\nMenu:")
+        print("1. Crea una nuova stanza")
+        print("2. Aggiungi un'opera ad una stanza")
+        print("3. Consulta le opere presenti in una stanza")
+        print("4. Consulta le stanze presenti")
+        print("5. Cerca informazioni su un'opera")
+        print("6. Cancella un'opera")
+        print("7. Cancella una stanza (solo se vuota)")
+        print("8. Esci")
+
+        scelta = input("Scelta: ")
+
+        if scelta == "1":
+            nome_stanza = input("Inserisci il nome della stanza da creare: ")
+            crea_stanza(museo, nome_stanza)
+        elif scelta == "2":
+            nome_stanza = input("Inserisci il nome della stanza in cui aggiungere l'opera: ")
+            aggiungi_opera(museo, nome_stanza)
+        elif scelta == "3":
+            nome_stanza = input("Inserisci il nome della stanza da consultare: ")
+            consulta_opere_stanza(museo, nome_stanza)
+        elif scelta == "4":
+            consulta_stanze(museo)
+        elif scelta == "5":
+            titolo = input("Inserisci il titolo dell'opera da cercare: ")
+            cerca_opera(museo, titolo)
+        elif scelta == "6":
+            titolo = input("Inserisci il titolo dell'opera da cancellare: ")
+            cancella_opera(museo, titolo)
+        elif scelta == "7":
+            nome_stanza = input("Inserisci il nome della stanza da cancellare: ")
+            cancella_stanza(museo, nome_stanza)
+        elif scelta == "8":
+            break
+        else:
+            print("Scelta non valida.")
