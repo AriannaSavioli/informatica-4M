@@ -1,0 +1,25 @@
+#Savioli Ariana 4M
+#esercitazione 2
+import json
+
+#apertura del file JSON
+f = open('es1.json',"r")  
+fileJSON = f.read()
+print(type(fileJSON))
+
+mydizionario=json.loads(fileJSON)
+
+#stampa delle chiavi
+print("chiavi:")
+for key in mydizionario.keys():
+    print(key)
+
+#stampa dei valori
+print("\nvalori:")
+for value in mydizionario.values():
+    print(value)
+
+#stampa coppia chiave_valore
+print("\ncoppie chiavi-valori:")
+for key, value in mydizionario.items():
+    print(key, ":", value)
