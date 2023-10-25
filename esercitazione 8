@@ -1,0 +1,36 @@
+#Savioli Arianna 4M
+#esercitazione 8
+class Conto:
+    def __init__(self, id_conto, Intestatario, Iban, Saldo_disponibile):
+        self.id_conto = id_conto
+        self.Intestatario = Intestatario
+        self.Iban = Iban
+        self.Saldo_disponibile = Saldo_disponibile
+        self.Patrimonio_investito = 0.0
+
+    def __str__(self):
+        return f"Id conto: {self.id_conto}\nIntestatario: {self.Intestatario}\nIban: {self.Iban}\nSaldo disponibile: {self.Saldo_disponibile}"
+    
+    def deposito(self, importo):
+        self.Saldo_disponibile += float(importo)
+
+    def prelievo(self, importo):
+        if self.Saldo_disponibile >= float(importo):
+            self.Saldo_disponibile -= float(importo)
+            return True
+        else:
+            return False 
+        
+    def investi(self, importo):
+        if self.Saldo_disponibile >= float(importo):
+            self.Saldo_disponibile -= float(importo)
+            self.Patrimonio_investito += float(importo)
+            return True
+        else:
+            return False 
+        
+    def disinvesti(self, importo):
+        self.Patrimonio_investito -= float(importo)
+
+    def get_patrimonio_totale(self):
+        return self.Saldo_disponibile + self.Patrimonio_investito
