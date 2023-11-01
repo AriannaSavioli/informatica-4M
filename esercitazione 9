@@ -1,0 +1,34 @@
+#Savioli Arianna 4M
+#esercizio 9
+class Ascensore:
+    def __init__(self, id, primo_piano, ultimo_piano, capienza_massima, peso_massimo):
+        self.id = id
+        self.piano_attuale = primo_piano
+        self.primo_piano = primo_piano
+        self.ultimo_piano = ultimo_piano
+        self.capienza_massima = capienza_massima
+        self.peso_massimo = peso_massimo
+        self.persone_a_bordo = 0
+        self.peso_a_bordo = 0.0
+    #funzione per prenotare
+    def prenota(self, num_persone, peso_persone):
+        if (self.persone_a_bordo + num_persone <= self.capienza_massima) and (self.peso_a_bordo + peso_persone <= self.peso_massimo):
+            self.persone_a_bordo += num_persone
+            self.peso_a_bordo += peso_persone
+            return True
+        else:
+            return False
+    #funzione per salire i piani
+    def sali(self, num_piani):
+        if self.piano_attuale + num_piani <= self.ultimo_piano:
+            self.piano_attuale += num_piani
+            return True
+        else:
+            return False
+    #funzione per scendere i piani
+    def scendi(self, num_piani):
+        if self.piano_attuale - num_piani >= self.primo_piano:
+            self.piano_attuale -= num_piani
+            return True
+        else:
+            return False
