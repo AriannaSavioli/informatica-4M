@@ -1,0 +1,30 @@
+#Savioli Arianna 4M
+#esercizio 10
+
+#classe persona
+class Persona:
+    def __init__(self, nome, età):
+        self.nome = nome
+        self.età = età
+    def presentazione(self):
+        return f"mi chiamo {self.nome} e ho {self.età} anni"
+#classe studente
+class Studente(Persona):
+    def __init__(self, nome, età, classe):
+        super().__init__(nome, età)
+        self.classe = classe
+    def presentazione(self):
+        return f"{super().presentazione()} sono uno studente della {self.classe} superiore"
+#classe insegnante
+class Insegnante(Persona):
+    def __init__(self, nome, età, materia):
+        super().__init__(nome, età)
+        self.materia = materia
+    def presentazione(self):
+        return f"{super().presentazione()} insegno {self.materia}."
+
+studente = Studente("giovanni", 15, "terza")
+insegnante = Insegnante("jane", 30, "matematica")
+#stampa
+print(studente.presentazione())
+print(insegnante.presentazione())
