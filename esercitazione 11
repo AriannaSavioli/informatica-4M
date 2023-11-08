@@ -1,0 +1,41 @@
+#Savioli Arianna 4M
+#esercizio 11
+
+class Bicicletta:
+    def __init__(self):
+        self.speed = 0.0
+        self.marcia = 0
+    
+    def speedUp(self):
+        self.speed += 1.0
+    
+    def speedDown(self):
+        self.speed -= 1.0
+    
+    def setMarcia(self, nuova_marcia):
+        self.marcia = nuova_marcia
+    
+    def __str__(self):
+        return "Velocità: {} km/h, Marcia: {}".format(self.speed, self.marcia)
+
+class MountainBike(Bicicletta):
+    def __init__(self):
+        super().__init__()
+        self.ammortizzatori = False
+    
+    def getAmmortizzatori(self):
+        return self.ammortizzatori
+    
+    def __str__(self):
+        return super().__str__() + ", Ammortizzatori: {}".format(self.ammortizzatori)
+
+class FatBike(Bicicletta):
+    def __init__(self, spessore_pneumatico):
+        super().__init__()
+        self.spessore_pneumatico = spessore_pneumatico
+    
+    def getSpessorePneumatico(self):
+        return self.spessore_pneumatico
+    
+    def __str__(self):
+        return super().__str__() + ", Spessore pneumatico: {}".format(self.spessore_pneumatico)
