@@ -1,0 +1,27 @@
+#creazione della classe persona
+class Persona:
+    def init(self, nome, eta):      
+        self.nome = nome
+        self.eta = eta
+        self.passaporto = None
+
+def rilascia_passaporto(self, numero_passaporto, paese_emissione):
+    self.passaporto = Passaporto(numero_passaporto, paese_emissione)
+#classe passaporto
+class Passaporto:
+    def init(self, numero_passaporto, paese_emissione):
+        self.numero_passaporto = numero_passaporto
+        self.paese_emissione = paese_emissione
+        self.persona = None
+
+def imposta_persona(self, persona):
+    self.persona = persona
+#creazione oggetto persona
+persona = Persona("Marco Rossi", 25)
+persona.rilascia_passaporto("123456789", "USA")
+
+#stampa
+print("Nome:", persona.nome)
+print("Età:", persona.eta)
+print("Numero passaporto:", persona.passaporto.numero_passaporto)
+print("Paese di emissione:", persona.passaporto.paese_emissione)
