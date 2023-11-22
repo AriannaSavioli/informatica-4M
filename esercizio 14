@@ -1,0 +1,23 @@
+#creazione della classe persona
+class Student:
+    #dichiarazione degli attributi
+    def __init__(self, nome, cognome, genere, eta):
+        self.nome = nome
+        self.cognome = cognome
+        self.genere = genere
+        self.eta = eta
+#creazione della classe classroom
+class Classroom:
+    #dichiarazione degli attributi
+    def __init__(self, id, nome_scuola, descrizione, studenti):
+        self.id = id
+        self.nome_scuola = nome_scuola
+        self.descrizione = descrizione 
+        self.students = []
+#metodi della classe 
+    def add_student(self, students): #aggiunta di uno studente alla lista
+        self.students.append(students)
+    def remove_student(self, student): #rimuovere uno studente dalla lista
+        self.students.remove(student)
+    def count_enrolled_students(self): #conta il numero degli studenti
+        return len(self.students)
