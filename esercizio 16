@@ -15,8 +15,8 @@ class Album:
     def __init__(self, titolo):
         self.titolo = titolo
         self.canzoni = []
-#creazione metodo che consente di contenere delle canzoni
-    def contiene_canzoni(self, titolo, durata):
+    #creazione metodo che consente di aggiungere delle canzoni
+    def aggiungi_canzoni(self, titolo, durata):
         canzone = Canzoni(titolo, durata)
         self.canzoni.append(canzone)
         return canzone
@@ -27,10 +27,10 @@ class Canzoni:
         self.titolo = titolo
         self.durata = durata
 #creazione della classe premium album
-class PremiumAlbum:
+class PremiumAlbum(Album):
     #dichiarazione degli attributi
-    def __init__(self, album, contenuti_esclusivi):
-        self.album = album
+    def __init__(self, titolo, contenuti_esclusivi):
+        super().__init__(titolo)
         self.contenuti_esclusivi = contenuti_esclusivi
 #creazione della classe playlist
 class Playlist:
@@ -38,8 +38,8 @@ class Playlist:
     def __init__(self, nome):
         self.nome = nome
         self.canzoni = []
-#creazione metodo che consente di contenere delle canzoni
-    def contiene_canzoni(self, titolo, durata):
+    #creazione metodo che consente di aggiungere delle canzoni
+    def aggiungi_canzoni(self, titolo, durata):
         canzone = Canzoni(titolo, durata)
         self.canzoni.append(canzone)
         return canzone
