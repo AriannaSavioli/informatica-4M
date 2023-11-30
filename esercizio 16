@@ -1,0 +1,60 @@
+#creazione della classe artista
+class Artista:
+    #dichiarazione degli attributi
+    def __init__(self, nome):
+        self.nome = nome
+        self.albums = []
+    #creazione metodo che consente di creare un album
+    def crea_album(self, titolo):
+        album = Album(titolo)
+        self.albums.append(album)
+        return album
+#creazione della classe album
+class Album:
+    #dichiarazione degli attributi
+    def __init__(self, titolo):
+        self.titolo = titolo
+        self.canzoni = []
+#creazione metodo che consente di contenere delle canzoni
+    def contiene_canzoni(self, titolo, durata):
+        canzone = Canzoni(titolo, durata)
+        self.canzoni.append(canzone)
+        return canzone
+#creazione della classe canzoni
+class Canzoni:
+    #dichiarazione degli attributi
+    def __init__(self, titolo, durata):
+        self.titolo = titolo
+        self.durata = durata
+#creazione della classe premium album
+class PremiumAlbum:
+    #dichiarazione degli attributi
+    def __init__(self, album, contenuti_esclusivi):
+        self.album = album
+        self.contenuti_esclusivi = contenuti_esclusivi
+#creazione della classe playlist
+class Playlist:
+    #dichiarazione degli attributi
+    def __init__(self, nome):
+        self.nome = nome
+        self.canzoni = []
+#creazione metodo che consente di contenere delle canzoni
+    def contiene_canzoni(self, titolo, durata):
+        canzone = Canzoni(titolo, durata)
+        self.canzoni.append(canzone)
+        return canzone
+#creazione della classe iscrizione
+class Iscrizione:
+    #dichiarazione degli attributi
+    def __init__(self, utente, tipo, prezzo):
+        self.utente = utente
+        self.tipo = tipo
+        self.prezzo = prezzo
+#creazione della classe utente
+class Utente:
+    #dichiarazione degli attributi
+    def __init__(self, iscrizione, playlist, nome_utente, email):
+        self.iscrizione = iscrizione
+        self.playlist = playlist
+        self.nome_utente = nome_utente
+        self.email = email
