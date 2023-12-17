@@ -1,60 +1,71 @@
-#creazione della classe artista
-class Artista:
-    #dichiarazione degli attributi
-    def __init__(self, nome):
-        self.nome = nome
-        self.albums = []
-    #creazione metodo che consente di creare un album
-    def crea_album(self, titolo):
-        album = Album(titolo)
-        self.albums.append(album)
-        return album
-#creazione della classe album
+class User:
+    def __init__(self,username,email,playlist,subscription):
+        self.username=username
+        self.email=email
+        self.playlist=playlist
+        self.subscription=subscription
+class Artist:
+    def __init__(self,name):
+        self.name=name
+        self.album=[]
+    def add_album(self,album):
+        self.album.extend(album)
+    def __str__(self):
+        album=""
+        for i in self.album:
+            album+=i.__str__()+"\n"
+        return f"Nome Artist: {self.name}\n{album}"
 class Album:
-    #dichiarazione degli attributi
-    def __init__(self, titolo):
-        self.titolo = titolo
-        self.canzoni = []
-    #creazione metodo che consente di aggiungere delle canzoni
-    def aggiungi_canzoni(self, titolo, durata):
-        canzone = Canzoni(titolo, durata)
-        self.canzoni.append(canzone)
-        return canzone
-#creazione della classe canzoni
-class Canzoni:
-    #dichiarazione degli attributi
-    def __init__(self, titolo, durata):
-        self.titolo = titolo
-        self.durata = durata
-#creazione della classe premium album
-class PremiumAlbum(Album):
-    #dichiarazione degli attributi
-    def __init__(self, titolo, contenuti_esclusivi):
-        super().__init__(titolo)
-        self.contenuti_esclusivi = contenuti_esclusivi
-#creazione della classe playlist
+    def __init__(self,title,song):
+        self.title=title
+        self.song=song
+    def __str__(self):
+        canzoni=""
+        for i in self.song:
+            canzoni+=i.__str__()+"\n"
+        return f"Titolo Album: {self.title} \nCanzoni:\n{canzoni}"
+class premium_album:
+    def __init__(self,title,song,exclusive_content):
+        super().__init__(title,song)
+        self.exclusive_content=exclusive_content
+class Song:
+    def __init__(self,title,duration):
+        self.title=title
+        self.duration=duration
+    def __str__(self):
+        return f"Titolo canzone: {self.title} -Durata: {self.duration}"
 class Playlist:
-    #dichiarazione degli attributi
-    def __init__(self, nome):
-        self.nome = nome
-        self.canzoni = []
-    #creazione metodo che consente di aggiungere delle canzoni
-    def aggiungi_canzoni(self, titolo, durata):
-        canzone = Canzoni(titolo, durata)
-        self.canzoni.append(canzone)
-        return canzone
-#creazione della classe iscrizione
-class Iscrizione:
-    #dichiarazione degli attributi
-    def __init__(self, utente, tipo, prezzo):
-        self.utente = utente
-        self.tipo = tipo
-        self.prezzo = prezzo
-#creazione della classe utente
-class Utente:
-    #dichiarazione degli attributi
-    def __init__(self, iscrizione, playlist, nome_utente, email):
-        self.iscrizione = iscrizione
-        self.playlist = playlist
-        self.nome_utente = nome_utente
-        self.email = email
+    def    __init__(self,name,song):
+        self.name=name
+        self.song=song
+    def __str__(self):
+        canzoni=""
+        for i in self.song:
+            canzoni+=i.__str__()+"\n"
+        return f"Nome: {self.name} \nCanzoni:\n{canzoni}"
+    
+class Subscription:
+    def __init__(self,type,price):
+        self.type=type
+        self.price=price
+    def __str__(self):
+        return f"Abbonamento {self.type} -Prezzo: {self.price}"
+
+
+user_subcription= Subscription("Premium",34000000)
+user_playlist=[Playlist("Lebron Pre Workout",[Song("Pure Cocaine", 206),Song("Coral Cruiser",360000)])]
+user=User("Lebron James", "thegoatbballer@gmail.com",user_playlist,user_subcription)
+
+artist_album=[Album("Her loss",[Song("BackOutsideBoyz",152),Song("Jumbotron Shit Poppin",137),Song("Pussy&Millions(feat.Travis Scott)",242)]),Album("Scorpion",[Song("NoNStop",238),Song("God'S Plan",198),Song("Talk Up(feat Jay-Z)",223)])]
+artist_album2=[Album("Lyfë",[Song("Flawlëss(feat Lil Uzi Vert) ",174),Song("Out Thë way",150),Song("Talk",174)]),Album("Up 2 Më",[Song("Got Rich",121),Song("Monëy So Big",160),Song("Swërved it",137)])]
+album1=Album("Lyfë",[Song("Flawlëss(feat Lil Uzi Vert)",174),Song("Out Thë way",150),Song("Talk",174)])
+
+artist=Artist("Drake")
+artist.add_album(artist_album)
+artist2=Artist("Yëat")
+artist2.add_album(artist_album2)
+print(artist)
+print(artist2)
+print(user_subcription)
+pl1=Playlist("Lebron Pre Workout",[Song("Pure Cocaine", 206),Song("Coral Cruiser",360000)])
+print(pl1)
