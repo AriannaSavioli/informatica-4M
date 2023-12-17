@@ -1,0 +1,73 @@
+@startuml
+
+class User {
+  UserID: int
+  Username: string
+  Email: string
+  Password: string
+  FriendsList: List<User>
+
+  AddFriend(user: User): void
+  RemoveFriend(user: User): void
+  PostContent(content: Post): void
+}
+
+class RegularUser {
+ Interests: List<string>
+ ActivityLog: List<string>
+
+ LikePost(post: Post): void
+ CommentOnPost(post: Post, comment: string): void
+}
+
+class BusinessUser {
+ BusinessID: int
+ ProductsServices: List<string>
+ CustomerReviews: List<string>
+
+  Advertise(): vo.id
+  RespondToReviews(): void
+}
+
+class Post {
+  PostID: int
+  Content: string
+  Timestamp: datetime
+  LikesCount: int
+  Comments: List<Comment>
+
+  Like(): void
+  Comment(comment: string): void
+  Share(): void
+}
+
+class TextPost {
+  WordCount: int
+  Language: string
+
+  AnalyzeSentiment(): string
+}
+
+class ImagePost {
+  ImageURL: string
+  Resolution: string
+  FiltersApplied: List<string>
+
+  ApplyFilter(filter: string): void
+  TagPeople(people: List<User>): void
+}
+
+RegularUser--|>User
+BusinessUser--|>User
+TextPost --|>Post
+ImagePost--|>Post
+User "1" --  "n" Post :post
+RegularUser "1" -- "n" Post: post and comments
+BusinessUser "n" -- "n" Post:advertising and responding to customer reviews
+User "n" -- "n" ImagePost
+
+
+
+
+
+@enduml
