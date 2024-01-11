@@ -1,0 +1,58 @@
+@startuml
+
+class Prodotto {
+   nome: string
+   prezzo: float
+   disponibilita: int
+   ---
+   costruttore(nome, prezzo, disponibilita)
+}
+
+class Produttore {
+   nome: string
+   ---
+   costruttore(nome)
+}
+
+class Categoria {
+   nome: string
+   prodotti: list<Prodotto>
+   ---
+   costruttore(nome)
+   aggiungiProdotto(prodotto): void
+}
+
+class CategoriaPremium {
+   prodotti: list<Prodotto>
+   ---
+   costruttore(nome)
+}
+
+class Utente {
+   nome: string
+   indirizzo: string
+   carrello: list<Prodotto>
+   ordini: list<Ordine>
+   ---
+   costruttore(nome, indirizzo)
+   aggiungiAlCarrello(prodotto): void
+   effettuaOrdine(): Ordine
+}
+
+class Ordine {
+   stato: string
+   prodottiAcquistati: list<Prodotto>
+   ---
+   costruttore(utente, carrello)
+   spedisceOrdine(): void
+}
+
+Categoria "n" -- "n" Prodotto: contiene
+Produttore "1" -- "n" Prodotto: produce
+CategoriaPremium --|> Categoria: sottotipo di
+CategoriaPremium "n" -- "n" Prodotto: contiene
+Utente "n" -- "n" Prodotto: nel carrello
+Utente "1" -- "n" Ordine: effettua
+Ordine "n" -- "n" Prodotto: contiene
+
+@enduml
