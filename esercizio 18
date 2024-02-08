@@ -1,0 +1,158 @@
+#Savioli Arianna 4M
+#esercizio 18
+
+#creazione della classe veicolo
+class Vehicle:
+    #costruttore della classe
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+#creazione della classe macchina
+class Car(Vehicle):
+    #costruttore della classe
+    def __init__(self, make, model, num_doors):
+        super().__init__(make, model)
+        self.num_doors = num_doors
+#creazione della classe motocicletta
+class Motorcycle(Vehicle):
+    #costruttore della classe    
+    def __init__(self, make, model, engine_capacity):
+        super().__init__(make, model)
+        self.engine_capacity = engine_capacity
+#creazione della classe cliente
+class Customer:
+    #costruttore della classe
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address
+#creazione della classe venditori
+class Salesperson:
+    #costruttore della classe
+    def __init__(self, name):
+        self.name = name
+#creazione della classe sala
+class Showroom:
+    #costruttore della classe
+    def __init__(self, location):
+        self.location = location
+        self.vehicles = []
+#metodo che permette di aggiungere veicoli
+    def add_vehicle(self, vehicle):
+        self.vehicles.append(vehicle)
+#creazione classe vendita
+class Sale:
+    #costruttore della classe
+    def __init__(self, vehicle, customer, salesperson):
+        self.vehicle = vehicle
+        self.customer = customer
+        self.salesperson = salesperson
+#variabili di stato
+salespersons = []
+vehicles = []
+sales = []
+customers = []
+showrooms = []
+#metodo per inserire una sala
+def add_showroom():
+    location = input("inserisci la posizione dello showroom: ")
+    showroom = Showroom(location)
+    showrooms.append(showroom)
+    print("showroom aggiunto con successo!")
+#metodo per aggiungere un venditore
+def add_salesperson():
+    name = input("inserisci il nome del venditore: ")
+    salesperson = Salesperson(name)
+    salespersons.append(salesperson)
+    print("venditore aggiunto con successo!")
+#metodo per aggiungere un veicolo
+def add_vehicle():
+    make = input("inserisci la marca del veicolo: ")
+    model = input("inserisci il modello del veicolo: ")
+    vehicle_type = input("inserisci il tipo di veicolo (car/motorcycle): ")
+    #ciclo che suddivide i veicoli tra macchine e moto
+    if vehicle_type == "car":
+        num_doors = input("inserisci il numero di porte della vettura: ")
+        vehicle = Car(make, model, num_doors)
+    elif vehicle_type == "motorcycle":
+        engine_capacity = input("inserisci la cilindrata della moto: ")
+        vehicle = Motorcycle(make, model, engine_capacity)
+    else:
+        print("tipo di veicolo non valido")
+        return
+    vehicles.append(vehicle)
+    print("veicolo aggiunto con successo")
+#metodo per effettuare una vendita
+def make_sale():
+    if not salespersons or not customers or not vehicles:
+        print("non ci sono venditori, clienti o veicoli registrati")
+        return
+    #selezione del venditore
+    print("seleziona il venditore: ")
+    for i, salesperson in enumerate(salespersons):
+        print(f"{i + 1}) {salesperson.name}")
+    #numero venditore
+    salesperson_index = int(input("inserisci il numero del venditore: ")) - 1
+    salesperson = salespersons[salesperson_index]
+    #selezione del cliente
+    print("seleziona il cliente:")
+    for i, customer in enumerate(customers):
+        print(f"{i + 1}) {customer.name}")
+    #numero cliente
+    customer_index = int(input("inserisci il numero del cliente: ")) - 1
+    customer = customers[customer_index]
+    #selezione del veicolo
+    print("seleziona il veicolo:")
+    for i, vehicle in enumerate(vehicles):
+        print(f"{i + 1}) {vehicle.make} {vehicle.model}")
+    #numero veicolo
+    vehicle_index = int(input("inserisci il numero del veicolo: ")) - 1
+    vehicle = vehicles[vehicle_index]
+    sale = Sale(vehicle, customer, salesperson)
+    sales.append(sale)
+    #vendita
+    print("vendita effettuata con successo")
+#metodo per vedere i veicoli in vendita
+def show_vehicles_for_sale():
+    if not vehicles:
+        print("non ci sono veicoli registrati")
+        return
+    print("veicoli in vendita: ")
+    for i, vehicle in enumerate(vehicles):
+        print(f"{i + 1}) {vehicle.make} {vehicle.model}")
+#metodo per vedere le vendite effettuate
+def show_sales():
+    if not sales:
+        print("non ci sono vendite effettuate")
+        return
+    print("vendite effettuate: ")
+    for i, sale in enumerate(sales):
+        print(f"{i + 1}) {sale.vehicle.make} {sale.vehicle.model} - cliente: {sale.customer.name} - venditore: {sale.salesperson.name}")
+#menu
+while True:
+    print("\nmenu di gestione:")
+    print("1) aggiungi showroom")
+    print("2) aggiungi venditore")
+    print("3) aggiungi veicolo")
+    print("4) effettua vendita")
+    print("5) mostraveicoli in vendita")
+    print("6) mostra vendite effettuate")
+    print("7) esci")
+    #ciclo per selezionare l'azione che si vuole fare
+    choice = input("seleziona un'opzione: ")
+    #scelta
+    if choice == "1":
+        add_showroom()
+    elif choice == "2":
+        add_salesperson()
+    elif choice == "3":
+        add_vehicle()
+    elif choice == "4":
+        make_sale()
+    elif choice == "5":
+        show_vehicles_for_sale()
+    elif choice == "6":
+        show_sales()
+    elif choice == "7":
+        break
+    else:
+        print("opzione non valida, sceglierne un'altra")
