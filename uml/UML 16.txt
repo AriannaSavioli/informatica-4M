@@ -1,0 +1,48 @@
+@startuml 
+
+Artista "1" -- "n"  Album : crea
+Album "n" -- "n" Canzoni : contiene
+Canzoni "n" -- "n" Playlist : contiene
+Playlist "n" -- "n" Utente : appartiene
+Iscrizione "1" -- "n" Utente : e' associato
+PremiumAlbum --> Album
+
+class Artista {
+    nome: str
+    --
+    constructor(nome, Album): void
+    crea_album()
+}
+class Album{
+    titolo: str
+    --
+    constructor(titolo, Canzoni): void
+    contiene_Canzoni()
+}
+class Canzoni{
+    titolo: str
+    durata: float
+}
+class PremiumAlbum{
+    contenuti_esclusivi: str
+    --
+    constructor(Album, contenuti_esclusivi): void
+}
+class Playlist{
+    nome: str
+    --
+    constructor(nome, Canzoni): void
+}
+class Iscrizione{
+    tipo: str
+    prezzo: float
+    --
+    constructor(Utente,tipo,prezzo): void
+}
+class Utente{
+    nome_utente: str
+    email: str
+    --
+    constructor(Iscrizione, Playlist, nome_utente, email): void
+}
+@enduml

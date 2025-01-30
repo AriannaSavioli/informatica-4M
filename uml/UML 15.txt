@@ -1,0 +1,27 @@
+@startuml
+
+class Student{
+   name: str
+   surname: str
+   gender: str
+   age: int
+   course: list
+   --
+   constructor(name, surname, gender, age, course): void
+   enrolled_courses(): str
+}
+class Course{
+   id : str
+   uni_name: str
+   description: str
+   students: list[Student]
+   --
+   constructor(id, uni_name, description, students): void
+   add_student(Student): void
+   remove_student(Student): void
+   count_enrolled_students(): int
+}
+
+Course "many" *--* "many" Student : contains
+
+@enduml
